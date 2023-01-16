@@ -1,11 +1,25 @@
-import React from "react";
+import Home from "./Home";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#0098f1",
+    },
+    secondary: {
+      main: "#006abc",
+    },
+  },
+});
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>Hellow</p>
-      </header>
+      <nav>
+        <ThemeProvider theme={theme}>
+          <Home />
+        </ThemeProvider>
+      </nav>
     </div>
   );
 }
