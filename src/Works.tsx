@@ -99,7 +99,7 @@ const WorkItem = ({ work }: { work: Work }) => {
       <Typography
         variant="subtitle2"
         component="span"
-        style={{ fontWeight: "bold" }}
+        sx={{ fontWeight: "bold" }}
       >
         {persional ? `${title}【個人プロジェクト】` : title}
       </Typography>
@@ -115,20 +115,22 @@ const WorkItem = ({ work }: { work: Work }) => {
       </ul>
 
       {links && (
-        <div style={{ marginTop: 12, marginLeft: 6 }}>
+        <div style={{ marginTop: 12, paddingLeft: 8 }}>
           <Typography variant="caption">Links:</Typography>
           {links.map((item) => (
             <Link
               key={item}
-              underline="always"
+              // underline="always"
               style={{
+                marginTop: 6,
                 display: "block",
                 fontSize: 12,
                 color: theme.palette.secondary.main,
+                wordBreak: "break-all",
               }}
               href={item}
               target="_blank"
-              rel="noopener"
+              rel="noreferrer"
             >
               {item}
             </Link>
@@ -147,16 +149,19 @@ export default function Works() {
   const theme = useTheme();
 
   return (
-    <div
+    <Container
       id="works"
-      style={{ padding: 80, backgroundColor: theme.palette.background.paper }}
+      sx={{
+        padding: { xs: 1, md: 16 },
+        backgroundColor: theme.palette.background.paper,
+      }}
     >
       <Container>
         <SectionTitle title={"Works"} />
       </Container>
 
       <div>
-        <Timeline position="alternate">
+        <Timeline position="alternate" style={{ padding: 0 }}>
           {WORKS.map((item) => (
             <TimelineItem key={item.title}>
               <TimelineOppositeContent
@@ -193,6 +198,6 @@ export default function Works() {
           ))}
         </Timeline>
       </div>
-    </div>
+    </Container>
   );
 }

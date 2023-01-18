@@ -85,7 +85,7 @@ export default function Header() {
                     key={page}
                     href={`#${page}`}
                     onClick={handleCloseNavMenu}
-                    sx={{ my: 2, display: "block" }}
+                    sx={{ my: 1, display: "block", fontWeight: "bold" }}
                   >
                     {page}
                   </Button>

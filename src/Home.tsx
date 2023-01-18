@@ -3,7 +3,7 @@ import About from "./About";
 import Skills from "./Skills";
 import Works from "./Works";
 import Header from "./Header";
-import Fooder from "./Fooder";
+import Footer from "./Footer";
 import { useTheme } from "@mui/material/styles";
 
 export default function Home() {
@@ -16,7 +16,7 @@ export default function Home() {
       <About />
       <Skills />
       <Works />
-      <Fooder />
+      <Footer />
     </div>
   );
 }

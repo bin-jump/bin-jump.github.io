@@ -63,7 +63,10 @@ export default function Skills() {
         </Typography>
       </Container>
 
-      <Box sx={{ display: "flex", marginTop: 10 }} alignItems={"center"}>
+      <Box
+        sx={{ display: { sx: "block", md: "flex" }, marginTop: 10 }}
+        alignItems={"center"}
+      >
         <div style={{ marginRight: 40 }}>
           <SkillStack title="Front End" skills={FRONT_END_SKILLS} />
           <SkillStack title="Back End" skills={BACK_END_SKILLS} />
