@@ -4,25 +4,19 @@ import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import { useTheme } from "@mui/material/styles";
+import SectionTitle from "./components/SectionTitle";
+
+const BASIC_INFO = `コンピューターハードウェア関連の修士を終了後、メーカーに入りソフトウェアエンジニアとして働いています。主にウェブアプリケーションを開発しており、バックエンドとフロントエンド両方経験しています。システムのアーキテクチャー設計もやっており、ドメイン駆動設計を実践しています。`;
 
 export default function About() {
+  const theme = useTheme();
+
   return (
     <div id="about" style={{ minHeight: 400, padding: 80 }}>
-      <Typography
-        style={{
-          fontSize: 34,
-          fontWeight: "bold",
-          color: "#333333",
-          textAlign: "center",
-          marginBottom: 80,
-        }}
-        variant="h2"
-        gutterBottom
-      >
-        About
-      </Typography>
+      <SectionTitle title={"About"} />
 
-      <Grid container alignItems={"stretch"}>
+      <Grid container alignItems={"stretch"} columns={{ xs: 6, md: 12 }}>
         <Grid item xs={6}>
           <Box
             style={{ height: "100%" }}
@@ -40,29 +34,35 @@ export default function About() {
 
         <Grid item xs={6}>
           <Box
-            style={{ height: "100%", paddingRight: 100 }}
+            sx={{ height: "100%", paddingRight: { xs: 0, md: 10 } }}
             display="flex"
             justifyContent="center"
             alignItems="center"
           >
             <div>
               <Typography
-                style={{ fontSize: 28, fontWeight: "bold", color: "#006abc" }}
-                variant="h2"
+                style={{
+                  fontWeight: "bold",
+                  color: theme.palette.text.primary,
+                }}
+                variant="h6"
                 gutterBottom
               >
                 Zhang
               </Typography>
-              <Typography variant="body1" gutterBottom>
-                コンピューターハードウェア関連の修士を終了後、メーカーに入りソフトウェアエンジニアとして働いています。主にウェブアプリケーションを開発しており、バックエンドとフロントエンド両方経験しています。システムのアーキテクチャー設計もやっており、ドメイン駆動設計を実践しています。
+              <Typography variant="body2" gutterBottom>
+                {BASIC_INFO}
               </Typography>
 
               <IconButton
                 href="https://github.com/bin-jump"
                 target="_blank"
+                rel="noopener"
                 aria-label="my-github"
               >
-                <GitHubIcon sx={{ color: "#333333", fontSize: 20 }} />
+                <GitHubIcon
+                  sx={{ color: theme.palette.text.secondary, fontSize: 20 }}
+                />
               </IconButton>
             </div>
           </Box>

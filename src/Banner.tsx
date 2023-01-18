@@ -1,8 +1,11 @@
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import { useTheme } from "@mui/material/styles";
 
 export default function Banner() {
+  const theme = useTheme();
+
   return (
     <Grid
       container
@@ -12,29 +15,30 @@ export default function Banner() {
         width: "100vw",
         minHeight: 300,
         minWidth: 280,
-        backgroundColor: "#0098f1",
+        backgroundColor: theme.palette.primary.main,
         padding: 50,
       }}
     >
       <Grid item xs={10}>
         <div>
           <Typography
-            style={{
-              fontSize: 120,
-              color: "white",
+            sx={{
+              fontSize: { xs: 80, md: 120 },
+              color: theme.palette.background.paper,
               fontWeight: "bold",
             }}
-            //   variant="h1"
           >
             Hi, I'm Zhang
           </Typography>
 
           <Typography
-            style={{ fontSize: 50, color: "white" }}
-            variant="h2"
+            sx={{
+              fontSize: { xs: 40, md: 50 },
+              color: theme.palette.background.paper,
+            }}
             gutterBottom
           >
-            This is my portfolio
+            Welcome to my portfolio
           </Typography>
         </div>
       </Grid>
@@ -49,7 +53,10 @@ export default function Banner() {
           }}
         >
           <Typography
-            style={{ fontSize: 20, color: "white" }}
+            sx={{
+              fontSize: { xs: 16, md: 20 },
+              color: theme.palette.background.paper,
+            }}
             variant="h4"
             gutterBottom
           >

@@ -6,115 +6,184 @@ import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
 import Paper from "@mui/material/Paper";
+import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
+import Container from "@mui/material/Container";
+import { useTheme } from "@mui/material/styles";
+import Link from "@mui/material/Link";
+import GroupsIcon from "@mui/icons-material/Groups";
+import PersonIcon from "@mui/icons-material/Person";
+import SectionTitle from "./components/SectionTitle";
 
 interface Work {
   title: string;
   description: string;
   bulletPoints: string[];
   persional: boolean;
+  start: Date;
+  end?: Date;
+  links?: string[];
 }
+
 const WORKS: Work[] = [
   {
     title:
-      "分析機器を利用するユーザーの測定結果などのデータを一元管理し、データの活用を支援するシステムの設計及び開発",
+      "分析機器ユーザーの測定結果などのデータを一元管理し、データの活用を支援するシステムの設計・開発",
     description: "",
     bulletPoints: [
-      "ユーザーがデータをアップロード及び解析処理できるシステムの仕様設計、アーキテクチャ設計、バックエンド作成など",
-      ".NET Core関連フレームワーク及びPostgreSQLによるバックエンドの開発",
-      "ドメイン駆動設計(DDD)に基づいたバックエンドの設計、実装",
-      "RESTFul APIの設計",
+      "ユーザーがデータファイルをアップロード及び解析処理できるシステムの仕様設計、アーキテクチャ設計、バックエンド開発など",
+      ".NET Coreフレームワーク及びPostgreSQLによるバックエンドの開発",
+      "ドメイン駆動設計(DDD)に基づいたバックエンドの設計及び実装",
+      "RESTful APIの設計",
       "Redisを用いたシングルサインオン仕組みを設計",
       "Reactによる仕様デモ作成",
-      "クライアントサイド(Windowsソフトウェア)の処理部分の設計、実装",
+      "クライアント側(Windowsソフトウェア)の処理部分の設計と実装",
     ],
     persional: false,
+    start: new Date(2021, 4, 0),
   },
   {
-    title:
-      "ペットに関するソーシャルアプリのサーバーサイドとクライアントサイドを設計・実装・デザイン",
+    title: "ペットソーシャルアプリの設計・実装・デザイン",
     description: "",
     bulletPoints: [
-      "ユーザーが投稿、コメント、いいね、フォローなどができるソーシャルメディアアプリを作成",
-      "Spring Bootとドメイン駆動設計によりバックエンドを開発",
+      "ユーザーが投稿、コメント、いいね、フォローなどができるソーシャルメディアアプリのバックエンドとフロントエンドを作成",
+      "Spring Bootフレームワークとドメイン駆動設計によるバックエンドを開発",
       "Spring Data JPAを用いてデータベースアクセス層を開発",
-      "React Nativeを用いてクライアント側を開発",
-      "React, React Reduxで管理者サイドを作成",
+      "React Nativeを用いてモバイル側を開発",
+      "React, React Reduxによる管理者機能(シングルページアプリケーション)を作成",
       "UI/UXを設計",
     ],
     persional: true,
+    start: new Date(2021, 3, 0),
+    links: [
+      "https://github.com/bin-jump/petfabula_backend",
+      "https://github.com/bin-jump/petfabula_client",
+      "https://github.com/bin-jump/petfabula_admin",
+    ],
   },
 
   {
     title: "社内データ基盤システムの開発及び測定データ管理システムの開発",
     description: "",
     bulletPoints: [
-      "ユーザーがデータをアップロード、閲覧できるシステムのフロントエンドとバックエンドの開発",
-      ".NET Core関連フレームワークPostgreSQLによるバックエンドの開発",
+      "ユーザーがデータをアップロード及び閲覧できるシステムのフロントエンドとバックエンドの開発",
+      ".NET CoreフレームワークとPostgreSQLによるバックエンドの開発",
       "Reactによるフロントエンドの開発",
-      "ミドルウェアによる例外処理の提案、設計",
+      "ミドルウェアによる例外処理の提案と実装",
     ],
     persional: false,
+    start: new Date(2019, 4, 0),
+    end: new Date(2021, 3, 0),
   },
 
   {
-    title: "細胞画像の関連ソフトウェアの開発・保守メンテナンス",
+    title: "画像関連ソフトウェアの開発・保守メンテナンス",
     description: "",
     bulletPoints: [
-      "重たい処理をマルチスレッドによる速度向上",
+      "重たい処理をマルチスレッド化による速度向上",
       "メモリリークバグをGC関連ツールで修正",
       "同時処理におけるバグの修正",
       "既存のWindowsソフトウェアの機能追加",
     ],
     persional: false,
+    start: new Date(2017, 8, 0),
+    end: new Date(2019, 3, 0),
   },
 ];
 
 const WorkItem = ({ work }: { work: Work }) => {
-  const { title, description, bulletPoints } = { ...work };
+  const { title, description, bulletPoints, persional, links } = { ...work };
+  const theme = useTheme();
+
   return (
-    <Paper elevation={0} style={{ textAlign: "left" }}>
-      <Typography variant="subtitle2" component="span">
-        {title}
+    <Paper elevation={0} style={{ textAlign: "left", marginBottom: 40 }}>
+      <Typography
+        variant="subtitle2"
+        component="span"
+        style={{ fontWeight: "bold" }}
+      >
+        {persional ? `${title}【個人プロジェクト】` : title}
       </Typography>
 
       <Typography>{description}</Typography>
 
-      <ul>
+      <ul style={{ listStyleType: "disc" }}>
         {bulletPoints.map((item) => (
           <li key={item}>
             <Typography variant="body2">{item}</Typography>
           </li>
         ))}
       </ul>
+
+      {links && (
+        <div style={{ marginTop: 12, marginLeft: 6 }}>
+          <Typography variant="caption">Links:</Typography>
+          {links.map((item) => (
+            <Link
+              key={item}
+              underline="always"
+              style={{
+                display: "block",
+                fontSize: 12,
+                color: theme.palette.secondary.main,
+              }}
+              href={item}
+              target="_blank"
+              rel="noopener"
+            >
+              {item}
+            </Link>
+          ))}
+        </div>
+      )}
     </Paper>
   );
 };
 
+const dateStr = (date?: Date) => {
+  return date ? `${date.getFullYear()}年${date.getMonth() + 1}月` : "現在";
+};
+
 export default function Works() {
+  const theme = useTheme();
+
   return (
-    <div id="works" style={{ padding: 80, backgroundColor: "#ffffff" }}>
-      <div style={{ paddingLeft: 100, paddingRight: 100, marginBottom: 60 }}>
-        <Typography
-          style={{
-            fontSize: 34,
-            fontWeight: "bold",
-            color: "#333333",
-            textAlign: "center",
-            marginBottom: 80,
-          }}
-          variant="h2"
-          gutterBottom
-        >
-          Works
-        </Typography>
-      </div>
+    <div
+      id="works"
+      style={{ padding: 80, backgroundColor: theme.palette.background.paper }}
+    >
+      <Container>
+        <SectionTitle title={"Works"} />
+      </Container>
 
       <div>
         <Timeline position="alternate">
           {WORKS.map((item) => (
             <TimelineItem key={item.title}>
+              <TimelineOppositeContent
+                sx={{ m: "auto 0" }}
+                align="right"
+                variant="body2"
+                color="text.secondary"
+              >
+                <Typography
+                  sx={{ color: theme.palette.grey[500] }}
+                  variant="caption"
+                >
+                  {`${dateStr(item.start)} 〜 ${dateStr(item.end)}`}
+                </Typography>
+              </TimelineOppositeContent>
               <TimelineSeparator>
-                <TimelineDot variant="outlined" color="primary" />
+                <TimelineDot variant="outlined">
+                  {item.persional ? (
+                    <PersonIcon
+                      style={{ color: theme.palette.text.secondary }}
+                    />
+                  ) : (
+                    <GroupsIcon
+                      style={{ color: theme.palette.text.secondary }}
+                    />
+                  )}
+                </TimelineDot>
                 <TimelineConnector />
               </TimelineSeparator>
               <TimelineContent>

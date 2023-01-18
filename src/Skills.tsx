@@ -1,6 +1,14 @@
 import Typography from "@mui/material/Typography";
-import Chip from "@mui/material/Chip";
+import Chip, { ChipProps } from "@mui/material/Chip";
 import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import { useTheme } from "@mui/material/styles";
+import SectionTitle from "./components/SectionTitle";
+import { styled } from "@mui/material/styles";
+
+const SkillChip = styled(Chip)<ChipProps>(({ theme }) => ({
+  backgroundColor: theme.palette.grey[100],
+}));
 
 const FRONT_END_SKILLS = ["Javascript", "Typescript", "React", "React-Redux"];
 const BACK_END_SKILLS = [
@@ -13,49 +21,49 @@ const BACK_END_SKILLS = [
   "PostgreSQL",
   "Mysql",
 ];
+const SKILL_INFO = `バックエンドに関して業務上では主にC#の技術スタックを経験していますが、少しPyhton系を触っています。また、個人でJavaの技術スタック関連を勉強しやっています。フロントエンドに関して、主にReactの技術スタックを利用しています。`;
 
 const SkillStack = ({ title, skills }: { title: string; skills: string[] }) => {
+  const theme = useTheme();
+
   return (
-    <div>
+    <Container>
       <Typography
-        style={{ marginBottom: 20, marginTop: 16, fontWeight: "bold" }}
-        variant="subtitle1"
+        style={{
+          marginBottom: 20,
+          marginTop: 16,
+          fontWeight: "bold",
+          color: theme.palette.primary.main,
+          fontSize: 18,
+        }}
         gutterBottom
       >
         {title}
       </Typography>
       <Box>
         {skills.map((item) => (
-          <Chip sx={{ m: 1 }} key={item} label={item} />
+          <SkillChip sx={{ m: 1 }} key={item} label={item} />
         ))}
       </Box>
-    </div>
+    </Container>
   );
 };
 
 export default function Skills() {
   return (
-    <div id="skills" style={{ padding: 80 }}>
-      <div style={{ paddingLeft: 100, paddingRight: 100, marginBottom: 60 }}>
+    <Container id="skills" style={{ paddingTop: 80, paddingBottom: 80 }}>
+      <Container>
+        <SectionTitle title={"Skill Set"} />
         <Typography
-          style={{
-            fontSize: 34,
-            fontWeight: "bold",
-            color: "#333333",
-            textAlign: "center",
-            marginBottom: 80,
-          }}
-          variant="h2"
+          variant="body2"
           gutterBottom
+          style={{ textAlign: "center" }}
         >
-          Skill Set
+          {SKILL_INFO}
         </Typography>
-        <Typography variant="body2" gutterBottom>
-          バックエンドに関して業務上では主にC#の技術スタックを経験していますが、少しPyhton系を触っています。また、個人でJavaの技術スタック関連を勉強しやっています。フロントエンドに関して、主にReactの技術スタックを利用しています。
-        </Typography>
-      </div>
+      </Container>
 
-      <Box sx={{ display: "flex" }} alignItems={"center"}>
+      <Box sx={{ display: "flex", marginTop: 10 }} alignItems={"center"}>
         <div style={{ marginRight: 40 }}>
           <SkillStack title="Front End" skills={FRONT_END_SKILLS} />
           <SkillStack title="Back End" skills={BACK_END_SKILLS} />
@@ -65,13 +73,11 @@ export default function Skills() {
           sx={{
             height: 200,
             width: 250,
-            // maxHeight: { xs: 233, md: 167 },
-            // maxWidth: { xs: 350, md: 250 },
           }}
           alt="The house from the offer."
           src="/skill_img.jpg"
         />
       </Box>
-    </div>
+    </Container>
   );
 }

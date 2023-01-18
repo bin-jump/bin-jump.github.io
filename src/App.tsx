@@ -4,10 +4,20 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#0098f1",
+      main: "#3C79F5",
     },
     secondary: {
       main: "#006abc",
+    },
+    text: {
+      primary: "#333333",
+      secondary: "#565656",
+    },
+  },
+  typography: {
+    fontFamily: `Hiragino Sans`,
+    body2: {
+      color: "#565656",
     },
   },
 });

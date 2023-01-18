@@ -9,10 +9,13 @@ import Container from "@mui/material/Container";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
 
 const pages = ["about", "skills", "works"];
 
 export default function Header() {
+  const theme = useTheme();
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -120,7 +123,11 @@ export default function Header() {
                 key={page}
                 href={`#${page}`}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{
+                  my: 2,
+                  color: theme.palette.background.paper,
+                  display: "block",
+                }}
               >
                 {page}
               </Button>
